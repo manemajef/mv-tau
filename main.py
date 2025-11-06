@@ -21,7 +21,9 @@ def put_file(name):
             class_found = True
 
         if class_found and part in ["lec", "rec", "hw"]:
-            path = path / (part + "s")
+            if part == "lec" or part == "lec":
+                part += "s"
+            path = path / (part)
             break
         if not class_found:
             return download_dir
@@ -35,7 +37,7 @@ def main():
         path = put_file(name)
         if path != download_dir:
             if not path.exists():
-                raise FileNotFoundError("")
+                raise FileNotFoundError(f"cant find path {path}")
             print(f"moving {file.name} to {path}")
             shutil.move(str(file), str(path / file.name))
 
